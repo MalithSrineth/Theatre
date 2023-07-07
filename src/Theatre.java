@@ -2,12 +2,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Theatre {
+    static int [] firstRow = new int[12];
+    static int [] secondRow = new int[16];
+    static int [] thirdRow = new int[20];
+
+    static int[][] rows = {firstRow, secondRow, thirdRow};
+
+    static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to the New Theatre");
-        int [] firstRow = new int[12];
-        int [] secondRow = new int[16];
-        int [] thirdRow = new int[20];
 
         Arrays.fill(firstRow, 0);
         Arrays.fill(secondRow, 0);
@@ -19,6 +23,7 @@ public class Theatre {
         switch (choice) {
             case 1:
                 //buy Ticket
+                buyTicket();
                 break;
             case 2:
                 //print seating area
@@ -60,5 +65,41 @@ public class Theatre {
         System.out.println("0) Quit");
         System.out.println("-------------------------------------------------");
         System.out.print("Enter your choice: ");
+    }
+
+    private static void buyTicket() {
+        int rowNumber, seatNumber;
+
+        int[] seatsPerRow = {12, 16, 20};
+
+        rowNumber = scanner.nextInt();
+        if (rowNumber < 1 || rowNumber > seatsPerRow.length) {
+            System.out.println("Wrong Row Number. Please Try Again");
+            buyTicket();
+            return;
+        }
+
+        int maxSeatNumber = seatsPerRow[rowNumber - 1];
+
+        do {
+            seatNumber = scanner.nextInt();
+            if (seatNumber < 1 || seatNumber > maxSeatNumber) {
+                System.out.println("Wrong Seat Number. Please Try Again");
+            } else {
+                break;
+            }
+        } while (true);
+
+        rows[rowNumber - 1][seatNumber - 1] = 1;
+
+
+        for (int[] i: rows) {
+            for (int j:i) {
+                System.out.print(j);
+            }
+            System.out.println("\n..................");
+
+        }
+
     }
 }
