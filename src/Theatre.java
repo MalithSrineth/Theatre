@@ -17,39 +17,46 @@ public class Theatre {
         Arrays.fill(secondRow, 0);
         Arrays.fill(thirdRow, 0);
 
-        printMenu();
-        int choice = scanner.nextInt();
 
-        switch (choice) {
-            case 1:
-                //buy Ticket
-                buyTicket();
-                break;
-            case 2:
-                //print seating area
-                break;
-            case 3:
-                //cancel Ticket
-                break;
-            case 4:
-                //list available seats
-                break;
-            case 5:
-                //save to file
-                break;
-            case 6:
-                //load from file
-                break;
-            case 7:
-                //print ticket info
-                break;
-            case 8:
-                //sort
-                break;
-            default:
-                System.out.println("Wrong Input Please Enter a valid Number.");
-                break;
-        }
+        int choice;
+        do {
+            printMenu();
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    //buy Ticket
+                    buyTicket();
+                    break;
+                case 2:
+                    //print seating area
+                    printSeatingArea();
+                    break;
+                case 3:
+                    //cancel Ticket
+                    break;
+                case 4:
+                    //list available seats
+                    break;
+                case 5:
+                    //save to file
+                    break;
+                case 6:
+                    //load from file
+                    break;
+                case 7:
+                    //print ticket info
+                    break;
+                case 8:
+                    //sort
+                    break;
+                default:
+                    System.out.println("Wrong Input Please Enter a valid Number.");
+                    break;
+            }
+        } while (choice != 0);
+
+
     }
     private static void printMenu() {
         System.out.println("-------------------------------------------------");
@@ -91,15 +98,36 @@ public class Theatre {
         } while (true);
 
         rows[rowNumber - 1][seatNumber - 1] = 1;
+    }
 
+    private static void printSeatingArea(){
+        System.out.println("     ***********");
+        System.out.println("     *  STAGE  *");
+        System.out.println("     ***********");
+        for (int[] row: rows) {
+            int count=0;
 
-        for (int[] i: rows) {
-            for (int j:i) {
-                System.out.print(j);
+            if (row.length==12){
+                System.out.print("    ");
+            } else if (row.length==16){
+                System.out.print("  ");
             }
-            System.out.println("\n..................");
+
+            for (int seats:row) {
+                if (count==(row.length/2)){
+                    System.out.print(" ");
+                }
+
+                if (seats==1){
+                    System.out.print("X");
+                } else {
+                    System.out.print("O");
+                }
+                count++;
+
+            }
+            System.out.println("");
 
         }
-
     }
 }
